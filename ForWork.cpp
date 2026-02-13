@@ -5,6 +5,7 @@ using namespace std;
 void StartProgramm();
 int SecurityInput(int);
 void openAllAutoStart();
+void Choise();
 
 int main() {
 	setlocale(LC_ALL, "ru");
@@ -16,9 +17,7 @@ void StartProgramm() {
 	int inp, SecInp;
 	while (true)
 	{
-		cout << "0. Выход" << endl;
-		cout << "1. Открыть папку автозагрузки" << endl;
-		cout << "Выберите: ";
+		Choise();
 		cin >> inp;
 		SecInp = SecurityInput(inp);
 		if (SecInp != -1) {
@@ -34,6 +33,12 @@ void StartProgramm() {
 			continue;
 		}
 	}
+}
+
+void Choise() {
+	cout << "0. Выход" << endl;
+	cout << "1. Открыть папку автозагрузки" << endl;
+	cout << "Выберите: ";
 }
 
 int SecurityInput(int inpp) {
