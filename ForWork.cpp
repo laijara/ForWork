@@ -4,8 +4,9 @@ using namespace std;
 
 void StartProgramm();
 int SecurityInput(int);
-void openAllAutoStart();
 void Choise();
+void openAllAutoStart();
+void copyShortCut();
 
 int main() {
 	setlocale(LC_ALL, "ru");
@@ -21,11 +22,22 @@ void StartProgramm() {
 		cin >> inp;
 		SecInp = SecurityInput(inp);
 		if (SecInp != -1) {
-			if (SecInp == 0) {
+			system("cls");
+			switch (SecInp)
+			{
+			case 0:
+				return;
+				break;
+			case 1:
+				openAllAutoStart();
+				break;
+			case 2:
+				copyShortCut();
+				break;
+			default:
+				cout << "Нет такого варианта!";
 				break;
 			}
-			system("cls");
-			openAllAutoStart();
 		}
 		else {
 			system("cls");
@@ -36,13 +48,15 @@ void StartProgramm() {
 }
 
 void Choise() {
+	cout << "-------------------------------" << endl;
 	cout << "0. Выход" << endl;
 	cout << "1. Открыть папку автозагрузки" << endl;
+	cout << "2. Копировать ярлыки на рабочий" << endl;
 	cout << "Выберите: ";
 }
 
 int SecurityInput(int inpp) {
-	if (!cin.fail() && inpp == 0 || inpp == 1) {
+	if (!cin.fail()) {
 		return inpp;
 	}
 	else {
@@ -54,4 +68,8 @@ int SecurityInput(int inpp) {
 
 void openAllAutoStart() {
 	system("explorer \"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\"");
+}
+
+void copyShortCut() {
+	system("if not exist files mkdir files && copy files\\* \"%USERPROFILE%\\Desktop\" /Y");
 }
